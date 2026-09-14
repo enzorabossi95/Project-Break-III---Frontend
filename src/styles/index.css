@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;700&display=swap');
+@import './variables.css';
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul, ol { list-style: none; } /*para quitar bullets y números por default en listas*/
+
+img { display: block; max-width: 100%; } /* para que no se desborden del contenedor por default */
+
+a { text-decoration: none; color: inherit; } /* para que los links no sean azules ni se subrayen por default */
+
+button, input {font-family: inherit;} /*por default los inputs/botones no heredan la tipografía del body en algunos browsers*/
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    line-height: var(--line-height-base);
+}
+
+h1, h2, h3 { font-family: var(--font-heading); } /* global, así no tenés que repetirlo en cada componente */
+
+html { scroll-behavior: smooth; } /* para que el scroll sea suave (para anchors internos, tipo el "view collection" que salta a una sección) */

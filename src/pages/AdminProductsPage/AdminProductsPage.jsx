@@ -1,0 +1,52 @@
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useProducts } from '../../hooks/useProducts.js';
+import { deleteProduct } from '../../api/products.js';
+import { Button } from '../../components/Button/Button.jsx';
+
+export function AdminProductsPage() {
+    const { data: products, loading, error, refetch } = useProducts();
+    const [deletingId, setDeletingId] = useState(null);
+    const [deleteError, setDeleteError] = useState(null);
+
+    async function handleDelete(id) {
+        if (!window.confirm('¿Seguro que querés eliminar este producto?')) return;
+        setDeletingId(id);
+        setDeleteError(null);
+        try {
+            await deleteProduct(id);
+            await refetch();
+        } catch {
+            setDeleteError('No se pudo eliminar el producto');
+        } finally {
+            setDeletingId(null);
+        }
+    }
+
+    if (loading) return <div>Cargando productos...</div>;
+    if (error) return <div>Error al cargar productos</div>;
+
+    return (
+        <div>
+            <h1>Productos</h1>
+            <Link to="/admin/products/new">Crear producto</Link>
+            {deleteError && <p>{deleteError}</p>}
+            {products.map((product) => (
+                <div key={product.id}>
+                    <span>{product.name}</span>
+                    <span> — ${product.price.toFixed(2)}</span>
+                    <span> — stock: {product.stock}</span>
+                    <Link to={`/admin/products/${product.id}/edit`}>Editar</Link>
+                    <Button
+                        variant="danger"
+                        type="button"
+                        onClick={() => handleDelete(product.id)}
+                        disabled={deletingId === product.id}
+                    >
+                        {deletingId === product.id ? 'Eliminando...' : 'Eliminar'}
+                    </Button>
+                </div>
+            ))}
+        </div>
+    );
+}
