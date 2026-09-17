@@ -1,0 +1,27 @@
+.title {
+    margin-bottom: var(--spacing-lg);
+}
+
+.empty {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+}
+
+.list li {
+    padding: var(--spacing-sm) 0;
+    border-bottom: var(--border-card);
+}
+
+.link {
+    color: var(--color-accent);
+    font-weight: var(--font-weight-medium);
+}
+
+.link:hover {
+    text-decoration: underline;
+}

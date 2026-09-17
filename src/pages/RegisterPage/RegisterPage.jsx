@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { registerThunk } from '../../store/authSlice.js';
 import { FormInput } from '../../components/FormInput/FormInput.jsx';
 import { Button } from '../../components/Button/Button.jsx';
+import styles from './RegisterPage.module.css';
 
 export function RegisterPage() {
     const [formData, setFormData] = useState({
@@ -46,44 +47,46 @@ export function RegisterPage() {
             await dispatch(registerThunk(dataToSend)).unwrap();
             navigate('/login');
         } catch {
-            // el error ya queda reflejado en el estado global (state.auth.error)
+            // no-op
         }
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h1>Crear cuenta</h1>
+        <div className={styles.page}>
+            <form className={styles.card} onSubmit={handleSubmit}>
+                <h1 className={styles.title}>Crear cuenta</h1>
 
-            <FormInput
-                label="Email"
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleChange}
-                autoFocus
-            />
+                <FormInput
+                    label="Email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    autoFocus
+                />
 
-            <FormInput
-                label="Contraseña"
-                name="password"
-                type="password"
-                value={formData.password}
-                onChange={handleChange}
-            />
+                <FormInput
+                    label="Contraseña"
+                    name="password"
+                    type="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                />
 
-            <FormInput
-                label="Confirmar contraseña"
-                name="confirmPassword"
-                type="password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-            />
+                <FormInput
+                    label="Confirmar contraseña"
+                    name="confirmPassword"
+                    type="password"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                />
 
-            {(validationError || error) && <p>{validationError || error}</p>}
+                {(validationError || error) && <p className={styles.error}>{validationError || error}</p>}
 
-            <Button type="submit" disabled={loading}>
-                {loading ? 'Creando cuenta...' : 'Registrarme'}
-            </Button>
-        </form>
+                <Button type="submit" disabled={loading}>
+                    {loading ? 'Creando cuenta...' : 'Registrarme'}
+                </Button>
+            </form>
+        </div>
     );
 }

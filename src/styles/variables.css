@@ -1,28 +1,30 @@
-/* Variables */
 :root {
-    --color-bg: #ffffff;
-    --color-bg-secondary: #f4f2ef;
-    --color-text-primary: #1a1a1a;
-    --color-text-secondary: #6b6b6b;
-    --color-accent: #d94f30;
-    --color-accent-hover: #b83e22;
-    --color-border: #e5e2dd;
-    --color-error: #c0392b;
-    --color-success: #4a7c59;   
+    /* Colores */
+    --color-bg: #FFFFFF;
+    --color-paper: #FFFFFF;
+    --color-ink: #000000;
+    --color-text-secondary: #4D4D4D;
+    --color-accent: #E31D1A;
+    --color-accent-dark: #B61715;
+    --color-border: #E0E0E0;
+    --color-error: #D14836;
+    --color-success: #3D6B4F;
 
+    /* Tipografía */
     --font-heading: 'Archivo Black', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    --font-body: 'Work Sans', sans-serif;
     --font-size-sm: 0.875rem;
     --font-size-base: 1rem;
     --font-size-lg: 1.25rem;
     --font-size-xl: 2rem;
-    --font-size-2xl: 3rem;
+    --font-size-2xl: 3.5rem;
     --font-weight-regular: 400;
     --font-weight-medium: 500;
     --font-weight-bold: 700;
-    --line-height-tight: 1.2;
+    --line-height-tight: 1.1;
     --line-height-base: 1.5;
 
+    /* Espaciado */
     --spacing-xs: 4px;
     --spacing-sm: 8px;
     --spacing-md: 16px;
@@ -30,10 +32,13 @@
     --spacing-xl: 32px;
     --spacing-2xl: 48px;
 
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --shadow-card: 0 2px 8px rgba(0,0,0,0.08); /* sombra sutil */
-    --shadow-hover: 0 4px 16px rgba(0,0,0,0.12); /* sombra al pasar el mouse, mas marcada */
+    /* Bordes */
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --border-card: 1px solid var(--color-border);
+    --border-card-hover: 2px solid var(--color-accent);
+
+    /* Transiciones */
     --transition-fast: 150ms ease;
     --transition-base: 250ms ease;
 }

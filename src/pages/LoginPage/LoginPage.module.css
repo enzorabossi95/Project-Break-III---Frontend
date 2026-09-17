@@ -1,0 +1,28 @@
+.page {
+    display: flex;
+    justify-content: center;
+    padding: var(--spacing-2xl) 0;
+}
+
+.card {
+    width: 100%;
+    max-width: 400px;
+    border: var(--border-card);
+    background: var(--color-paper);
+    padding: var(--spacing-xl);
+}
+
+.title {
+    margin-bottom: var(--spacing-lg);
+}
+
+.error {
+    color: var(--color-error);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.card button {
+    width: 100%;
+    margin-top: var(--spacing-sm);
+}

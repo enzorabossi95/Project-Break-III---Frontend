@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getCart, addToCart, removeFromCart, checkout } from '../api/cart.js';
+import { getCart, addToCart, removeFromCart } from '../api/cart.js';
+import { createCheckoutSession, confirmCheckoutSession } from '../api/checkout.js';
 
 const initialState = {
     items: [],
@@ -28,10 +29,18 @@ export const removeCartItem = createAsyncThunk(
     }
 );
 
-export const checkoutThunk = createAsyncThunk('cart/checkout', async () => {
-    const order = await checkout();
-    return order;
+export const createStripeSessionThunk = createAsyncThunk('cart/createStripeSession', async () => {
+    const { url } = await createCheckoutSession();
+    return url;
 });
+
+export const confirmStripeCheckoutThunk = createAsyncThunk(
+    'cart/confirmStripeCheckout',
+    async (sessionId) => {
+        const order = await confirmCheckoutSession(sessionId);
+        return order;
+    }
+);
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -83,16 +92,18 @@ const cartSlice = createSlice({
                 state.loading = false;
                 state.error = action.error.message;
             })
-            .addCase(checkoutThunk.pending, (state) => {
+            .addCase(createStripeSessionThunk.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(checkoutThunk.fulfilled, (state) => {
+            .addCase(createStripeSessionThunk.rejected, (state, action) => {
                 state.loading = false;
+                state.error = action.error.message;
+            })
+            .addCase(confirmStripeCheckoutThunk.fulfilled, (state) => {
                 state.items = [];
             })
-            .addCase(checkoutThunk.rejected, (state, action) => {
-                state.loading = false;
+            .addCase(confirmStripeCheckoutThunk.rejected, (state, action) => {
                 state.error = action.error.message;
             });
     },

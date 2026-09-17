@@ -5,6 +5,7 @@ import { fetchCart, removeCartItem } from '../../store/cartSlice.js';
 import { useProducts } from '../../hooks/useProducts.js';
 import { CartItem } from '../../components/CartItem/CartItem.jsx';
 import { CartSummary } from '../../components/CartSummary/CartSummary.jsx';
+import styles from './CartPage.module.css';
 
 export function CartPage() {
     const dispatch = useDispatch();
@@ -16,7 +17,6 @@ export function CartPage() {
         dispatch(fetchCart());
     }, [dispatch]);
 
-    // total es un dato derivado de items + products: se recalcula con useMemo, no vive en estado.
     const total = useMemo(() => {
         if (!products) return 0;
         return items.reduce((sum, item) => {
@@ -38,9 +38,9 @@ export function CartPage() {
 
     return (
         <div>
-            <h1>Mi carrito</h1>
+            <h1 className={styles.title}>Mi carrito</h1>
             {items.length === 0 ? (
-                <p>Tu carrito está vacío</p>
+                <p className={styles.empty}>Tu carrito está vacío</p>
             ) : (
                 <>
                     {items.map((item) => (

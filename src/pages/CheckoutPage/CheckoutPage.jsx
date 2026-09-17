@@ -1,13 +1,13 @@
 import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
-import { fetchCart, checkoutThunk } from '../../store/cartSlice.js';
+import { Link } from 'react-router-dom';
+import { fetchCart, createStripeSessionThunk } from '../../store/cartSlice.js';
 import { useProducts } from '../../hooks/useProducts.js';
 import { CartSummary } from '../../components/CartSummary/CartSummary.jsx';
+import styles from './CheckoutPage.module.css';
 
 export function CheckoutPage() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const { items, loading, error } = useSelector((state) => state.cart);
     const { data: products } = useProducts();
 
@@ -15,7 +15,6 @@ export function CheckoutPage() {
         dispatch(fetchCart());
     }, [dispatch]);
 
-    // total es un dato derivado de items + products: se recalcula con useMemo, no vive en estado.
     const total = useMemo(() => {
         if (!products) return 0;
         return items.reduce((sum, item) => {
@@ -24,12 +23,12 @@ export function CheckoutPage() {
         }, 0);
     }, [items, products]);
 
-    async function handleConfirm() {
+    async function handlePay() {
         try {
-            const order = await dispatch(checkoutThunk()).unwrap();
-            navigate('/checkout-success', { state: { order } });
+            const url = await dispatch(createStripeSessionThunk()).unwrap();
+            window.location.href = url;
         } catch {
-            // el error ya queda reflejado en el estado global (state.cart.error)
+            // no-op
         }
     }
 
@@ -39,17 +38,17 @@ export function CheckoutPage() {
     if (items.length === 0) {
         return (
             <div>
-                <h1>Confirmar compra</h1>
-                <p>Tu carrito está vacío</p>
-                <Link to="/products">Ir a productos</Link>
+                <h1 className={styles.title}>Confirmar compra</h1>
+                <p className={styles.empty}>Tu carrito está vacío</p>
+                <Link className={styles.link} to="/products">Ir a productos</Link>
             </div>
         );
     }
 
     return (
         <div>
-            <h1>Confirmar compra</h1>
-            <ul>
+            <h1 className={styles.title}>Confirmar compra</h1>
+            <ul className={styles.list}>
                 {items.map((item) => {
                     const product = products?.find((p) => p.id === item.productId);
                     return (
@@ -61,9 +60,9 @@ export function CheckoutPage() {
             </ul>
             <CartSummary
                 total={total}
-                onCheckout={handleConfirm}
+                onCheckout={handlePay}
                 disabled={items.length === 0}
-                label="Confirmar compra"
+                label="Pagar con Stripe"
             />
         </div>
     );

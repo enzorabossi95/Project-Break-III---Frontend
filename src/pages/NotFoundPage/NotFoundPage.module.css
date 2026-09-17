@@ -1,0 +1,27 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-2xl) 0;
+}
+
+.code {
+    font-size: var(--font-size-2xl);
+    line-height: var(--line-height-tight);
+    color: var(--color-accent);
+}
+
+.text {
+    color: var(--color-text-secondary);
+}
+
+.link {
+    color: var(--color-accent);
+    font-weight: var(--font-weight-medium);
+}
+
+.link:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,13 @@
+.page {
+    max-width: 888px;
+    margin: 0 auto;
+}
+
+.title {
+    margin-bottom: var(--spacing-lg);
+}
+
+.empty {
+    color: var(--color-text-secondary);
+    padding: var(--spacing-xl) 0;
+}

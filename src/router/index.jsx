@@ -20,7 +20,7 @@ import { AdminProductFormPage } from '../pages/AdminProductFormPage/AdminProduct
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <Layout/>,       // ruta padre
+        element: <Layout/>,
         children: [
             { index: true,           element: <HomePage/> },
             { path: "products",        element: <ProductsPage/> },

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { addReview } from '../../api/reviews.js';
 import { Button } from '../Button/Button.jsx';
+import styles from './ReviewForm.module.css';
 
 export function ReviewForm({ productId, onReviewAdded }) {
     const [rating, setRating] = useState(5);
@@ -24,20 +25,20 @@ export function ReviewForm({ productId, onReviewAdded }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Puntaje
-                <select value={rating} onChange={(e) => setRating(e.target.value)}>
+        <form className={styles.form} onSubmit={handleSubmit}>
+            <label className={styles.field}>
+                <span className={styles.label}>Puntaje</span>
+                <select className={styles.select} value={rating} onChange={(e) => setRating(e.target.value)}>
                     {[5, 4, 3, 2, 1].map((n) => (
                         <option key={n} value={n}>{n}</option>
                     ))}
                 </select>
             </label>
-            <label>
-                Comentario
-                <textarea value={comment} onChange={(e) => setComment(e.target.value)} />
+            <label className={styles.field}>
+                <span className={styles.label}>Comentario</span>
+                <textarea className={styles.textarea} value={comment} onChange={(e) => setComment(e.target.value)} />
             </label>
-            {error && <p>{error}</p>}
+            {error && <p className={styles.error}>{error}</p>}
             <Button type="submit" disabled={submitting}>
                 {submitting ? 'Enviando...' : 'Enviar reseña'}
             </Button>

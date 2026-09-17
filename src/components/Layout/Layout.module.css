@@ -1,0 +1,6 @@
+.main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) var(--spacing-lg);
+    min-height: 60vh;
+}

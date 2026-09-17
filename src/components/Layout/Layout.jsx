@@ -3,22 +3,25 @@ import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { Header } from "../Header/Header.jsx";
 import { Footer } from "../Footer/Footer.jsx";
-import { fetchProfileThunk } from '../../store/authSlice.js';
+import { checkSessionThunk } from '../../store/authSlice.js';
 import { fetchWishlist } from '../../store/wishlistSlice.js';
 import { fetchCart } from '../../store/cartSlice.js';
 import styles from './Layout.module.css';
 
 export function Layout() {
     const dispatch = useDispatch();
-    const token = useSelector((state) => state.auth.token);
+    const user = useSelector((state) => state.auth.user);
 
     useEffect(() => {
-        if (token) {
-            dispatch(fetchProfileThunk());
+        dispatch(checkSessionThunk());
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (user) {
             dispatch(fetchWishlist());
             dispatch(fetchCart());
         }
-    }, [token, dispatch]);
+    }, [user, dispatch]);
 
     return (
         <>

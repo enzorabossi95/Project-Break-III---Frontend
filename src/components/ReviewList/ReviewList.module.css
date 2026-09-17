@@ -1,0 +1,25 @@
+.empty {
+    color: var(--color-text-secondary);
+    padding: var(--spacing-md) 0;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+}
+
+.list li {
+    padding: var(--spacing-md) 0;
+    border-bottom: var(--border-card);
+}
+
+.comment {
+    margin-top: var(--spacing-xs);
+}
+
+.date {
+    display: block;
+    margin-top: var(--spacing-xs);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}

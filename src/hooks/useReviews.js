@@ -19,7 +19,7 @@ export function useReviews(productId) {
     }, [productId]);
 
     useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect -- fetchReviews se expone como refetch reutilizable (ver ReviewForm)
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         fetchReviews();
     }, [fetchReviews]);
 

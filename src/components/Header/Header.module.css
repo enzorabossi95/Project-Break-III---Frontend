@@ -1,0 +1,136 @@
+.header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--color-accent);
+    color: var(--color-paper);
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-lg);
+    letter-spacing: 0.05em;
+    color: var(--color-paper);
+    transition: color var(--transition-fast);
+}
+
+.logo:hover {
+    color: var(--color-ink);
+}
+
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.menuButton {
+    display: block;
+    background: none;
+    border: 2px solid var(--color-paper);
+    color: var(--color-paper);
+    font-size: var(--font-size-lg);
+    line-height: 1;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    cursor: pointer;
+}
+
+.nav-menu {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-lg);
+    background: var(--color-accent);
+    z-index: 10;
+}
+
+.nav-menu.open {
+    display: flex;
+}
+
+.nav-menu a,
+.nav-menu button {
+    color: var(--color-paper);
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-base);
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    padding: 0;
+}
+
+.nav-menu a:hover,
+.nav-menu button:hover {
+    text-decoration: underline;
+}
+
+.nav-menu a[aria-current="page"] {
+    color: var(--color-ink);
+}
+
+.cartLink {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-paper);
+}
+
+.cartIcon {
+    width: 24px;
+    height: 24px;
+}
+
+.cartBadge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-bold);
+    font-size: 0.7rem;
+    line-height: 1;
+}
+
+@media (min-width: 768px) {
+    .header {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+    }
+
+    .menuButton {
+        display: none;
+    }
+
+    .nav-menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        position: static;
+        padding: 0;
+        background: none;
+    }
+
+    .headerActions {
+        justify-self: end;
+    }
+}

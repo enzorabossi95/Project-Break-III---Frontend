@@ -1,0 +1,37 @@
+.item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) 0;
+    border-bottom: var(--border-card);
+}
+
+.image {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    background: var(--color-border);
+    flex-shrink: 0;
+}
+
+.info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    min-width: 0;
+}
+
+.name {
+    font-size: var(--font-size-base);
+}
+
+.priceLine {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.subtotal {
+    font-family: var(--font-heading);
+    white-space: nowrap;
+}

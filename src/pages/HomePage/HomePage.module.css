@@ -1,0 +1,8 @@
+.page {
+    max-width: 888px;
+    margin: 0 auto;
+}
+
+.sectionTitle {
+    margin-bottom: var(--spacing-lg);
+}

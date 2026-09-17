@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginThunk } from '../../store/authSlice.js';
 import { FormInput } from '../../components/FormInput/FormInput.jsx';
 import { Button } from '../../components/Button/Button.jsx';
+import styles from './LoginPage.module.css';
 
 export function LoginPage() {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -28,31 +29,36 @@ export function LoginPage() {
             await dispatch(loginThunk(formData)).unwrap();
             navigate('/');
         } catch {
-            // el error ya queda reflejado en el estado global (state.auth.error)
+            // no-op
         }
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <FormInput
-                label="Email"
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleChange}
-                autoFocus
-            />
-            <FormInput
-                label="Contraseña"
-                name="password"
-                type="password"
-                value={formData.password}
-                onChange={handleChange}
-            />
-            {(validationError || error) && <p>{validationError || 'Email o contraseña incorrectos'}</p>}
-            <Button type="submit" disabled={loading}>
-                {loading ? 'Ingresando...' : 'Iniciar sesión'}
-            </Button>
-        </form>
+        <div className={styles.page}>
+            <form className={styles.card} onSubmit={handleSubmit}>
+                <h1 className={styles.title}>Iniciar sesión</h1>
+                <FormInput
+                    label="Email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    autoFocus
+                />
+                <FormInput
+                    label="Contraseña"
+                    name="password"
+                    type="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                />
+                {(validationError || error) && (
+                    <p className={styles.error}>{validationError || 'Email o contraseña incorrectos'}</p>
+                )}
+                <Button type="submit" disabled={loading}>
+                    {loading ? 'Ingresando...' : 'Iniciar sesión'}
+                </Button>
+            </form>
+        </div>
     )
 }

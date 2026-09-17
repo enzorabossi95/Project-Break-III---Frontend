@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchWishlist } from '../../store/wishlistSlice.js';
 import { useProducts } from '../../hooks/useProducts.js';
 import { ProductGrid } from '../../components/ProductGrid/ProductGrid.jsx';
+import styles from './WishlistPage.module.css';
 
 export function WishlistPage() {
     const dispatch = useDispatch();
@@ -13,7 +14,6 @@ export function WishlistPage() {
         dispatch(fetchWishlist());
     }, [dispatch]);
 
-    // wishlistProducts es un dato derivado de products + productIds: se recalcula con useMemo.
     const wishlistProducts = useMemo(() => {
         if (!products) return [];
         return products.filter((p) => productIds.includes(p.id));
@@ -23,10 +23,10 @@ export function WishlistPage() {
     if (error) return <div>Error al cargar favoritos</div>;
 
     return (
-        <div>
-            <h1>Mis favoritos</h1>
+        <div className={styles.page}>
+            <h1 className={styles.title}>Mis favoritos</h1>
             {wishlistProducts.length === 0 ? (
-                <p>Todavía no agregaste productos a favoritos</p>
+                <p className={styles.empty}>Todavía no agregaste productos a favoritos</p>
             ) : (
                 <ProductGrid products={wishlistProducts} />
             )}
